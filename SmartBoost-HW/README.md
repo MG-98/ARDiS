@@ -1,4 +1,4 @@
-# SmartBoost-HW for ARDiS
+﻿# SmartBoost-HW for ARDiS
 
 SmartBoost-HW is a model-based DVFS policy (SmartBoost on real hardware) for
 [ARDiS](https://github.com/Chair-for-Embedded-Systems/ARDiS). It keeps the chip below a
@@ -22,7 +22,7 @@ change at the hottest core), and works in three phases:
 ardis/core/policies/dvfs/
     smartboost_hw.py         the policy (one configurable class, SmartBoostHW)
     thermal_model.py         thermal model architecture      (PLACEHOLDER, see below)
-    perfromance_model.py     performance model architecture  (PLACEHOLDER, see below)
+    performance_model.py     performance model architecture  (PLACEHOLDER, see below)
 SmartBoost-HW/
     smartboost_hw_testing.py run SmartBoost-HW variants on real hardware
     models/                  put your trained models here (see models/README.md)
@@ -39,7 +39,7 @@ The trained models and scalers are **not** included.
    'SmartBoostHW',                                    # in __all__
    'SmartBoostHW': '.dvfs.smartboost_hw',             # in _LAZY_IMPORTS
    ```
-3. **Fill in the model placeholders.** In `thermal_model.py` and `perfromance_model.py` every
+3. **Fill in the model placeholders.** In `thermal_model.py` and `performance_model.py` every
    number of the architecture was replaced by `N`. Replace each `N` with the value of your own
    trained model (LSTM hidden sizes, number of layers, feature count, output size, dense
    widths). The comment next to each `N` says what it is. The files raise a clear error while
@@ -64,8 +64,8 @@ Use it in your own experiment like any ARDiS DVFS policy:
 from ardis.core.policies import SmartBoostHW
 
 policy = SmartBoostHW(
-    thermal_model_path="SmartBoost-HW/models/thermal_model_lstm.pth",
-    performance_model_path="SmartBoost-HW/models/performance_model_lstm_1_app.pth",
+    thermal_model_path="SmartBoost-HW/models/thermal_model.pth",
+    performance_model_path="SmartBoost-HW/models/performance_model.pth",
     deployment_dir="SmartBoost-HW/models",
     core_type="E",          # "P" or "E": one core type per experiment
     margin_mode="gmm",      # "none" | "global" | "gmm"
@@ -93,6 +93,6 @@ for `P_`) are combinations of these options.
 ## Notes
 
 - The policy needs `get_core_temperatures` (or `get_core_temperature_metrics`) on the ARDiS event buffer.
-- `margin_mode="gmm"` needs `gmm_thermal_model.pkl` and `cluster_stat_thermal.pkl`, produced from the
+- `margin_mode="gmm"` needs `gmm.pkl` and `cluster_stats.pkl`, produced from the
   thermal-model embeddings of your training data.
 - The model files are pickled `torch` modules loaded with `weights_only=False`. Only load files you trust.

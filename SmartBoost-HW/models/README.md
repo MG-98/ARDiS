@@ -8,13 +8,13 @@ Put these files here:
 
 | File | What it is |
 |---|---|
-| `thermal_model_lstm.pth` | Your trained thermal forecasting model (full pickled `torch` module, class `LSTMForecaster`) |
-| `performance_model_lstm_1_app.pth` | Your trained performance forecasting model (class `ForecastLSTM`) |
+| `thermal_model.pth` | Your trained thermal forecasting model (full pickled `torch` module, class `LSTMForecaster`) |
+| `performance_model.pth` | Your trained performance forecasting model (class `ForecastLSTM`) |
 | `input_scaler.pkl` | Scaler fitted on the performance model inputs (`joblib`) |
 | `output_scaler.pkl` | Scaler fitted on the performance model output (`joblib`) |
-| `gmm_thermal_model.pkl` | Gaussian mixture fitted on the thermal-model embeddings (`margin_mode="gmm"` only) |
-| `cluster_stat_thermal.pkl` | Per-cluster statistics with the `p90` uncertainty (`margin_mode="gmm"` only) |
+| `gmm.pkl` | Gaussian mixture fitted on the thermal-model embeddings (`margin_mode="gmm"` only) |
+| `cluster_stats.pkl` | Per-cluster statistics with the `p90` uncertainty (`margin_mode="gmm"` only) |
 
 The architecture of your models must match
-`ardis/core/policies/dvfs/thermal_model.py` and `perfromance_model.py`. See the main
+`ardis/core/policies/dvfs/thermal_model.py` and `performance_model.py`. See the main
 [README](../README.md) for how to fill in the placeholders.

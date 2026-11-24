@@ -3,14 +3,14 @@
 Expected layout (the models/ folder next to this file; see models/README.md):
 
     SmartBoost-HW/models/
-        thermal_model_lstm.pth
-        performance_model_lstm_1_app.pth
+        thermal_model.pth
+        performance_model.pth
         input_scaler.pkl
         output_scaler.pkl
-        gmm_thermal_model.pkl            (only for margin_mode="gmm")
-        cluster_stat_thermal.pkl         (only for margin_mode="gmm")
+        gmm.pkl            (only for margin_mode="gmm")
+        cluster_stats.pkl         (only for margin_mode="gmm")
 
-The model architectures (thermal_model.py / perfromance_model.py) sit next to
+The model architectures (thermal_model.py / performance_model.py) sit next to
 smartboost_hw.py and are registered by the policy, so nothing has to be imported here.
 
 Usage (from the repo root):
@@ -31,8 +31,8 @@ from ardis.core.postprocessing.simple_clip_postprocessor import Clips
 from ardis.experiments import Experiment
 
 MODELS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
-THERMAL_MODEL = os.path.join(MODELS_DIR, "thermal_model_lstm.pth")
-PERFORMANCE_MODEL = os.path.join(MODELS_DIR, "performance_model_lstm_1_app.pth")
+THERMAL_MODEL = os.path.join(MODELS_DIR, "thermal_model.pth")
+PERFORMANCE_MODEL = os.path.join(MODELS_DIR, "performance_model.pth")
 
 # name -> SmartBoostHW options. Each entry replaces one of the old SmartBoost_dvfs_* files.
 VARIANTS = {
